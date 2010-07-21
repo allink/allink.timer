@@ -8,8 +8,7 @@ Best Practice
 -------------
 
 allink stores this source on a share point and created a MenuExtra MacOS X App with [Fluid](http://fluidapp.com/) which
-loads the `index.html` file over the filesystem e.g. `file:///Volumes/sharepoint/priska/index.html`.  
-Thanks Fluid we can use [Growl](http://growl.info/) as notification service over JavaScript too!
+loads the `index.html` file over the filesystem e.g. `file:///Volumes/sharepoint/priska/index.html`. Thanks Fluid we can use [Growl](http://growl.info/) as notification service over JavaScript too!
 
 Theming
 -------
