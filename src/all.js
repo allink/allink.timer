@@ -103,6 +103,13 @@ $(document).ready(function() {
         }
     });
     
+    PROJECTS.change(function() {
+        var projectId = parseInt($(this).attr('value'));
+        if (projectId > 0) {
+            enableTimeInputFields();
+        }
+    })
+    
     ADD_BUTTON.click(function() {
         LOADER.show();
         
@@ -213,7 +220,7 @@ $(document).ready(function() {
     
     function refreshProjects(baseUrl, apiToken, companyId) {
         
-        //var projects = new Array();
+        disableTimeInputFields();
         
         LOADER.show();
         PROJECTS.hide();
@@ -229,7 +236,7 @@ $(document).ready(function() {
             },
             success: function(msg) {
                 var filtered = $(msg).find('project').filter(function(index) {
-                   return parseInt($(this).find('company').find('id').text()) == parseInt(companyId);
+                   return parseInt($(this).find('company').find('id').text()) == parseInt(companyId) && $(this).find('status').text() == 'active';
                 });
                 var sorted = $(filtered).sort(function(a, b) {
                    var at = $(a).find('name:first').text().toLowerCase();
@@ -239,10 +246,8 @@ $(document).ready(function() {
                 $(sorted).each(function() {
                     var id = $(this).find('id:first').text();
                     var name = $(this).find('name:first').text();
-                    //projects[id] = name;
                     $('<option value="' + id + '"></option>').html(name).appendTo(PROJECTS);
                 });
-                //$.cookie(COOKIE_PROJECTS, projects, COOKIE_OPTIONS);
                 PROJECTS.show();
                 LOADER.hide();
             }
@@ -307,6 +312,18 @@ $(document).ready(function() {
         });
         
         return projectName;
+    }
+    
+    function disableTimeInputFields() {
+        HOURS.attr("disabled", "disabled");
+        DESC.attr("disabled", "disabled");
+        ADD_BUTTON.attr("disabled", "disabled");
+    }
+    
+    function enableTimeInputFields() {
+        HOURS.attr("disabled", "");
+        DESC.attr("disabled", "");
+        ADD_BUTTON.attr("disabled", "");
     }
     
     startUp();
