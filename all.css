@@ -14226,3 +14226,12 @@ body.writeboards div.page_header_links {
 table td p {
   line-height:0;
 }
+
+/* LOADER */
+
+#loader {
+    position: absolute;
+    right: 25px;
+    top: 23px;
+    display: none;
+}
