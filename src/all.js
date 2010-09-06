@@ -195,8 +195,8 @@ $(document).ready(function() {
             },
             success: function(msg) {
                 var sorted = $(msg).find('company').sort(function(a, b) {
-                   var at = $(a).find('name:first').text();
-                   var bt = $(b).find('name:first').text();
+                   var at = $(a).find('name:first').text().toLowerCase();
+                   var bt = $(b).find('name:first').text().toLowerCase();
                    return (at < bt) ? -1 : 1;
                 });
                 $(sorted).each(function() {
@@ -232,8 +232,8 @@ $(document).ready(function() {
                    return parseInt($(this).find('company').find('id').text()) == parseInt(companyId);
                 });
                 var sorted = $(filtered).sort(function(a, b) {
-                   var at = $(a).find('name:first').text();
-                   var bt = $(b).find('name:first').text();
+                   var at = $(a).find('name:first').text().toLowerCase();
+                   var bt = $(b).find('name:first').text().toLowerCase();
                    return (at < bt) ? -1 : 1;
                 });
                 $(sorted).each(function() {
