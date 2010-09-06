@@ -128,16 +128,15 @@ $(document).ready(function() {
                 url: baseUrl + '/projects/' + projectId + '/time_entries.xml',
                 contentType: 'application/xml',
                 data: '<time-entry><person-id>' + userId + '</person-id><date>' + date + '</date><hours>' + hours + '</hours><description>' + desc + '</description></time-entry>',
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                    xhr.setRequestHeader('Accept','application/xml');
-                },
+                beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
                 complete: function(request, status) {
                     if (parseInt(request.status) == 201) {
-                        window.fluid.showGrowlNotification({
-                           'title': COMPANY.text(),
-                           'description': "tracked " + hours + " hours on " + projectName,
-                        });
+                        if (window.fluid) {
+                            window.fluid.showGrowlNotification({
+                               'title': COMPANY.text(),
+                               'description': "tracked " + hours + " hours on " + projectName,
+                            }); 
+                        }
                         DESC.attr('value','');
                         HOURS.attr('value','');
                     };
@@ -156,10 +155,7 @@ $(document).ready(function() {
             type: 'GET',
             url: baseUrl + '/account.xml',
             contentType: 'application/xml',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                xhr.setRequestHeader('Accept','application/xml');
-            },
+            beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
                 $(msg).find('account:first').each(function() {
                     COMPANY.text($(this).find('name:first').text());
@@ -171,10 +167,7 @@ $(document).ready(function() {
             type: 'GET',
             url: baseUrl + '/me.xml',
             contentType: 'application/xml',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                xhr.setRequestHeader('Accept','application/xml');
-            },
+            beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
                 $(msg).find('person:first').each(function() {
                     USER.text($(this).find('first-name').text() + ' ' + $(this).find('last-name').text());
@@ -196,10 +189,7 @@ $(document).ready(function() {
             type: 'GET',
             url: baseUrl + '/companies.xml',
             contentType: 'application/xml',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                xhr.setRequestHeader('Accept','application/xml');
-            },
+            beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
                 var sorted = $(msg).find('company').sort(function(a, b) {
                    var at = $(a).find('name:first').text().toLowerCase();
@@ -230,10 +220,7 @@ $(document).ready(function() {
             type: 'GET',
             url: baseUrl + '/projects.xml',
             contentType: 'application/xml',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                xhr.setRequestHeader('Accept','application/xml');
-            },
+            beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
                 var filtered = $(msg).find('project').filter(function(index) {
                    return parseInt($(this).find('company').find('id').text()) == parseInt(companyId) && $(this).find('status').text() == 'active';
@@ -271,21 +258,18 @@ $(document).ready(function() {
             url: baseUrl + '/time_entries/report.xml',
             contentType: 'application/xml',
             data: 'from=' + date + '&to=' + date + '&subject_id=' + userId,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                xhr.setRequestHeader('Accept','application/xml');
-            },
+            beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
                 var total = 0.0;
                 $(msg).find('time-entry').each(function() {
                     var hours = $(this).find('hours').text();
                     var projectId = $(this).find('project-id').text();
-                    var projectName = getProjectName(baseUrl, apiToken, projectId);
+                    //var projectName = getProjectName(baseUrl, apiToken, projectId);
                     var desc = $(this).find('description').text();
-                    $('<li></li>').html(projectName + ' - ' + hours + 'h - ' + desc).appendTo(HISTORY_LIST);
+                    $('<li></li>').html(hours + 'h - ' + desc).appendTo(HISTORY_LIST);
                     total = total + parseFloat(hours);
                 });
-                $('<li></li>').html('<strong>Total ' + total + 'h</strong>').appendTo(HISTORY_LIST);
+                $('<li></li>').html('<strong>' + total + 'h Total</strong>').appendTo(HISTORY_LIST);
                 LOADER.hide();
             }
         });
@@ -301,10 +285,7 @@ $(document).ready(function() {
             url: baseUrl + '/projects/' + projectId + '.xml',
             contentType: 'application/xml',
             async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
-                xhr.setRequestHeader('Accept','application/xml');
-            },
+            beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
                 projectName = $(msg).find('name:first').text() + " (" + $(msg).find('name:last').text() + ")";
                 LOADER.hide();
@@ -325,6 +306,11 @@ $(document).ready(function() {
         DESC.attr("disabled", "");
         ADD_BUTTON.attr("disabled", "");
     }
+    
+    function setDefaultRequestHeader(xhr) {
+        xhr.setRequestHeader('Authorization', 'Basic ' + $.base64.encode(apiToken + ':X'));
+        xhr.setRequestHeader('Accept','application/xml');
+    } 
     
     startUp();
 
