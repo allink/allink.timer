@@ -195,13 +195,13 @@ $(document).ready(function() {
             },
             success: function(msg) {
                 var sorted = $(msg).find('company').sort(function(a, b) {
-                   var at = $(a).find('name').text();
-                   var bt = $(b).find('name').text();
+                   var at = $(a).find('name:first').text();
+                   var bt = $(b).find('name:first').text();
                    return (at < bt) ? -1 : 1;
                 });
                 $(sorted).each(function() {
                     var id = $(this).find('id').text();
-                    var name = $(this).find('name').text();
+                    var name = $(this).find('name:first').text();
                     $('<option value="' + id + '"></option>').html(name).appendTo(COMPANIES);
                 });
                 COMPANIES.show();
