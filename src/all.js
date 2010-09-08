@@ -25,6 +25,7 @@ $(document).ready(function() {
     var COMPANY = $('#company');
     var COMPANIES = $('#companies');
     var USER_ID = $('#userId');
+    var DATE = $('#date');
     var HOURS = $('#hours');
     var DESC = $('#desc');
     var LOADER = $('#loader');
@@ -35,6 +36,8 @@ $(document).ready(function() {
     function startUp() {
         BASE_URL.attr('value', $.cookie(COOKIE_BASE_URL));
         API_TOKEN.attr('value', $.cookie(COOKIE_API_TOKEN));
+        var todayAsString = new Date().asString();
+        DATE.datePicker({startDate:'1996-01-01', endDate:todayAsString}).val(todayAsString).trigger('change');
         checkSettings();
         refreshCompanies(baseUrl, apiToken);
     }
@@ -119,8 +122,7 @@ $(document).ready(function() {
         var projectName = $('option:selected',PROJECTS).text();
         var hours = HOURS.attr('value');
         var desc = DESC.attr('value');
-        var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var date = DATE.datePicker().val();
         
         if (companyId > 0 && projectId > 0 && hours > 0) {
             $.ajax({

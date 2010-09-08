@@ -106,3 +106,29 @@ table.forum_view td.message a span.title:hover {
   color: #fff;
   background: #03c;
 }
+
+a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url("calendar.png") no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+
+div.dp-popup {
+    background: none repeat scroll 0 0 #EDF3FE;
+    width: auto;
+}
+
+table.jCalendar td.selected {
+    background: none repeat scroll 0 0 #ff7800;
+}
+
