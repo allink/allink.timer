@@ -70,6 +70,7 @@ $(document).ready(function() {
         HISTORY_LINK.removeClass('current');
         
         TIME_LINK.addClass('current');
+        DATE.val(new Date().asString());
         TIME.show();
         
         refreshAccount(baseUrl, apiToken);
@@ -141,6 +142,7 @@ $(document).ready(function() {
                         }
                         DESC.attr('value','');
                         HOURS.attr('value','');
+                        DATE.val(new Date().asString());
                     };
                     LOADER.hide();
                 },
