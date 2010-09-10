@@ -1,13 +1,5 @@
 $(document).ready(function() {
     
-    // reminder all 30min
-    // $(this).everyTime('1800s',function(i) {
-    //     window.fluid.showGrowlNotification({
-    //        'title': COMPANY.text(),
-    //        'description': "don't forget to track your time",
-    //     });
-    // });
-    
     var COOKIE_BASE_URL = 'base_url';
     var COOKIE_API_TOKEN = 'api_token';
     var COOKIE_PROJECTS = 'projects_cache';
@@ -32,12 +24,12 @@ $(document).ready(function() {
     var USER = $('#user');
     var HISTORY_LIST = $('#history_list');
     var ADD_BUTTON = $('#addButton');
+    var HISTORY_DATE = $('#historyDate');
     
     function startUp() {
         BASE_URL.attr('value', $.cookie(COOKIE_BASE_URL));
         API_TOKEN.attr('value', $.cookie(COOKIE_API_TOKEN));
-        var todayAsString = new Date().asString();
-        DATE.datePicker({startDate:'1996-01-01', endDate:todayAsString}).val(todayAsString).trigger('change');
+        refreshCalendar();
         checkSettings();
         refreshCompanies(baseUrl, apiToken);
     }
@@ -112,7 +104,11 @@ $(document).ready(function() {
         if (projectId > 0) {
             enableTimeInputFields();
         }
-    })
+    });
+    
+    HISTORY_DATE.change(function() {
+        refreshHistory(baseUrl, apiToken);
+    });
     
     ADD_BUTTON.click(function() {
         LOADER.show();
@@ -250,11 +246,7 @@ $(document).ready(function() {
         LOADER.show();
         
         var userId = parseInt(USER_ID.text());
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = (today.getMonth() + 1);
-        var day = today.getDate();
-        var date = year + (month < 10 ? '0' : '') + month + (day < 10 ? '0' : '') + day;
+        var date = HISTORY_DATE.datePicker().val();
         
         HISTORY_LIST.empty();
         $.ajax({
@@ -268,7 +260,6 @@ $(document).ready(function() {
                 $(msg).find('time-entry').each(function() {
                     var hours = $(this).find('hours').text();
                     var projectId = $(this).find('project-id').text();
-                    //var projectName = getProjectName(baseUrl, apiToken, projectId);
                     var desc = $(this).find('description').text();
                     $('<li></li>').html(hours + 'h - ' + desc).appendTo(HISTORY_LIST);
                     total = total + parseFloat(hours);
@@ -316,6 +307,22 @@ $(document).ready(function() {
         xhr.setRequestHeader('Accept','application/xml');
     } 
     
+    function refreshCalendar() {
+        var todayAsString = new Date().asString();
+        DATE.datePicker({startDate:'1996-01-01', endDate:todayAsString}).val(todayAsString).trigger('change');
+        HISTORY_DATE.datePicker({startDate:'1996-01-01', endDate:todayAsString}).val(todayAsString).trigger('change');
+    }
+    
     startUp();
+    
+    // Cron Job all 15 minutes
+    $(this).everyTime('900s',function(i) {
+        refreshCalendar();
+        // time tracking reminder
+        // window.fluid.showGrowlNotification({
+        //    'title': COMPANY.text(),
+        //    'description': "don't forget to track your time",
+        // });
+    });
 
 });
