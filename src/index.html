@@ -56,7 +56,7 @@
                                                     <table>
                                                         <tr>
                                                             <td><p>Date:</p></td>
-                                                            <td><input type="text" name="date" id="date" size="12" disabled="disabled" style="float: left;" /></td>
+                                                            <td><input type="text" name="date" id="date" size="12" disabled="disabled" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td><p>Company:</p></td>
@@ -96,10 +96,11 @@
                                     <div class="Left">
                                         <div class="col">
                                             <div class="page_header">
-                                                <h1>Time History of Today</h1>
+                                                <h1>Time History</h1>
                                             </div>
                                             <div class="innercol">
                                                 <div class="page content">
+                                                    <input type="text" name="historyDate" id="historyDate" size="12" disabled="disabled" /><br/><br/>
                                                     <ul id="history_list"></ul>
                                                 </div>
                                             </div>
@@ -129,11 +130,11 @@
                                                     <table>
                                                         <tr>
                                                             <td><p>Base URL:</p></td>
-                                                            <td><input type="text" name="baseUrl" id="baseUrl" size="30" /></td>
+                                                            <td><input type="text" name="baseUrl" id="baseUrl" size="30" /> <span style="font-size:9px;color:grey;">e.g. https://company.basecamphq.com</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td><p>API Token:</p></td>
-                                                            <td><input type="text" name="apiToken" id="apiToken" size="30" /></td>
+                                                            <td><input type="text" name="apiToken" id="apiToken" size="30" /> <span style="font-size:9px;color:grey;">Personal API Token</span></td>
                                                         </tr>
                                                     </table>
                                                 </div>
