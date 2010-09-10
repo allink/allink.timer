@@ -62,9 +62,9 @@ $(document).ready(function() {
         HISTORY_LINK.removeClass('current');
         
         TIME_LINK.addClass('current');
-        DATE.val(new Date().asString());
         TIME.show();
         
+        refreshCalendar();
         refreshAccount(baseUrl, apiToken);
         refreshCompanies(baseUrl, apiToken);
     });
@@ -78,6 +78,7 @@ $(document).ready(function() {
         HISTORY_LINK.addClass('current');
         HISTORY.show();
         
+        refreshCalendar();
         refreshAccount(baseUrl, apiToken);
         refreshHistory(baseUrl, apiToken);
     });
@@ -138,7 +139,6 @@ $(document).ready(function() {
                         }
                         DESC.attr('value','');
                         HOURS.attr('value','');
-                        DATE.val(new Date().asString());
                     };
                     LOADER.hide();
                 },
