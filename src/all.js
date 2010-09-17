@@ -78,7 +78,6 @@ $(document).ready(function() {
         HISTORY_LINK.addClass('current');
         HISTORY.show();
         
-        refreshCalendar();
         refreshAccount(baseUrl, apiToken);
         refreshHistory(baseUrl, apiToken);
     });
