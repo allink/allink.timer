@@ -1,0 +1,134 @@
+a:link, a:visited {
+  color: #03c;
+}
+
+a:hover {
+  color: #fff;
+  background-color: #03c;
+}
+
+#Header {
+  background-color: #000000;
+}
+
+#Header h1 {
+  color: #ff7800;
+}
+
+#Header h1 a:link, #Header h1 a:visited {
+  color: #ff7800;
+  text-decoration: none;
+}
+
+#Header h1 a:hover {
+  color: #ff7800;
+  background-color: #000000;
+  text-decoration: underline;
+}
+
+#Header h1 span {
+  color: #ffffff;
+}
+
+#Header div.navigation, 
+#Header div.navigation a:link, 
+#Header div.navigation a:visited {
+  color: #ffffff;
+}
+
+#Header div.navigation a:hover {
+  color: #fff;
+  background-color: #ff7800;
+}
+
+#Header div.navigation a.current:link, 
+#Header div.navigation a.current:visited {
+  color: #ff7800;
+}
+
+#Header div.navigation a.current:hover {
+  color: #ff7800;
+  background-color: #000000;
+}
+
+#P2P_selector {
+  border: 1px solid #ffffff;
+  color: #ff7800;
+}
+
+#Tabs a:link, #Tabs a:visited {
+  background-color: #585858;
+  color: #fff;
+
+}
+
+#Tabs ul#MainTabs a:link.current, #Tabs ul#MainTabs a:visited.current,
+.Right #categories a.current:link, .Right #categories a.current:visited {
+  color: #000000;
+}
+
+#Tabs a:hover {
+  color: #fff;
+  background-color: #ff7800;
+}
+
+#Tabs li#AdminTab a:link, #Tabs li#AdminTab a:visited {
+  color: #ffffff;
+  background-color: #000000;
+  border-bottom: 1px solid #000000;
+  text-decoration: underline;
+}
+
+#Tabs li#AdminTab a:hover {
+  color: #ff7800;
+}
+
+#Tabs li#AdminTab a.current {
+  color: #ff7800;
+  text-decoration: none;
+}
+
+#project_switcher div.menu a:hover,
+#project_switcher div.menu a:hover span {
+  background: #ebebeb !important;
+}
+
+#project_switcher div.menu a:active,
+#project_switcher div.menu a:active span {
+  background: #ffa !important;
+}
+
+table.forum_view td.message a:hover {
+  color: #03c;
+}
+
+table.forum_view td.message a span.title:hover {
+  color: #fff;
+  background: #03c;
+}
+
+a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url("calendar.png") no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+
+div.dp-popup {
+    background: none repeat scroll 0 0 #EDF3FE;
+    width: auto;
+}
+
+table.jCalendar td.selected {
+    background: none repeat scroll 0 0 #ff7800;
+}
+

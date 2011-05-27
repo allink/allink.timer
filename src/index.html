@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <title>priska</title>
+        <link href="all.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="datePicker.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="theme.css" media="screen" rel="stylesheet" type="text/css" />
+        <script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+        <script src="jquery.cookie.js" type="text/javascript"></script>
+        <script src="jquery.base64.min.js" type="text/javascript"></script>
+        <script src="jquery.timers.js" type="text/javascript"></script>
+        <script src="date.js" type="text/javascript"></script>
+        <script src="jquery.datePicker.js" type="text/javascript"></script>
+        <script src="all.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div id="Header" class="global">
+            <h1 id="company"></h1>
+            <div class="navigation">
+                <div id="settings_signout_and_help">
+                  <span class="name" id="user">disconnected, please check settings</span>
+                  <div id="userId" style="display:none;"></div>
+                </div>
+                <div id="Tabs">
+                    <ul id="MainTabs">
+                        <li><a id="time_link" href="#"class="current">Time</a></li>
+                        <li><a id="history_link" href="#">History</a></li>
+                        <li><a id="settings_link" href="#">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="loader">
+                <img src="loader.gif" />
+            </div>
+        </div>
+        
+        
+        <div style="position: relative;" id="Wrapper">
+            
+            <!-- Time Tracking Tab -->
+            <div id="time">
+                <div class="container" id="screen_body" style="">
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <div class="Left">
+                                        <div class="col">
+                                            <div class="page_header">
+                                                <h1>Time Tracking</h1>
+                                            </div>
+                                            <div class="innercol">
+                                                <div class="page content">
+                                                    <table>
+                                                        <tr>
+                                                            <td><p>Date:</p></td>
+                                                            <td><input type="text" name="date" id="date" size="12" disabled="disabled" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><p>Company:</p></td>
+                                                            <td><select id='companies'></select></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><p>Project:</p></td>
+                                                            <td><select id='projects' style="display:none;"></select></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><p>Text:</p></td>
+                                                            <td><input type="text" name="desc" id="desc" size="30" disabled="disabled" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><p>Hours:</p></td>
+                                                            <td><input type="text" name="hours" id="hours" size="5" disabled="disabled" /> <button type"button" id="addButton" disabled="disabled">add</button></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- History -->
+            <div id="history" style="display:none;">
+                <div class="container" id="screen_body" style="">
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <div class="Left">
+                                        <div class="col">
+                                            <div class="page_header">
+                                                <h1>Time History</h1>
+                                            </div>
+                                            <div class="innercol">
+                                                <div class="page content">
+                                                    <input type="text" name="historyDate" id="historyDate" size="12" disabled="disabled" /><br/><br/>
+                                                    <ul id="history_list"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Time Tracking Tab -->
+            <div id="settings" style="display:none;">
+                <div class="container" id="screen_body" style="">
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <div class="Left">
+                                        <div class="col">
+                                            <div class="page_header">
+                                                <h1>Settings</h1>
+                                            </div>
+                                            <div class="innercol">
+                                                <div class="page content">
+                                                    <table>
+                                                        <tr>
+                                                            <td><p>Base URL:</p></td>
+                                                            <td><input type="text" name="baseUrl" id="baseUrl" size="30" /> <span style="font-size:9px;color:grey;">e.g. https://company.basecamphq.com</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><p>API Token:</p></td>
+                                                            <td><input type="text" name="apiToken" id="apiToken" size="30" /> <span style="font-size:9px;color:grey;">Personal API Token</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </body>
+</html>
