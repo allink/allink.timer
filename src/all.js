@@ -118,7 +118,7 @@ $(document).ready(function() {
         var projectId = parseInt(PROJECTS.attr('value'));
         var projectName = $('option:selected',PROJECTS).text();
         var hours = HOURS.attr('value');
-        var desc = DESC.attr('value');
+        var desc = $("<div/>").text(DESC.attr('value')).html();
         var date = DATE.datePicker().val();
         
         if (companyId > 0 && projectId > 0 && hours > 0) {

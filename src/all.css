@@ -14235,3 +14235,7 @@ table td p {
     top: 23px;
     display: none;
 }
+
+.version {
+    color: grey;
+}
