@@ -34,11 +34,11 @@ $(document).ready(function() {
         refreshCompanies(baseUrl, apiToken);
     }
     
-    function checkSettings() {   
+    function checkSettings() {
         baseUrl = BASE_URL.attr('value');
         apiToken = API_TOKEN.attr('value');
         
-        if (baseUrl != '' && apiToken != '') {
+        if (baseUrl !== '' && apiToken !== '') {
             refreshAccount(baseUrl, apiToken);
         }
     }
@@ -177,7 +177,7 @@ $(document).ready(function() {
         });
         
     }
-    
+
     function refreshCompanies(baseUrl, apiToken) {
         
         LOADER.show();
@@ -186,19 +186,26 @@ $(document).ready(function() {
         COMPANIES.append('<option value="0">please select...</option>');
         $.ajax({
             type: 'GET',
-            url: baseUrl + '/companies.xml',
+            url: baseUrl + '/projects.xml',
             contentType: 'application/xml',
             beforeSend: function(xhr) { setDefaultRequestHeader(xhr); },
             success: function(msg) {
-                var sorted = $(msg).find('company').sort(function(a, b) {
-                   var at = $(a).find('name:first').text().toLowerCase();
-                   var bt = $(b).find('name:first').text().toLowerCase();
+                var filtered = $(msg).find('project').filter(function(index) {
+                   return $(this).find('status').text() == 'active';
+                });
+                var sorted = $(filtered).sort(function(a, b) {
+                   var at = $(a).find('company').find('name:first').text().toLowerCase();
+                   var bt = $(b).find('company').find('name:first').text().toLowerCase();
                    return (at < bt) ? -1 : 1;
                 });
+                var ids = [];
                 $(sorted).each(function() {
-                    var id = $(this).find('id').text();
-                    var name = $(this).find('name:first').text();
-                    $('<option value="' + id + '"></option>').html(name).appendTo(COMPANIES);
+                    var id = $(this).find('company').find('id').text();
+                    var name = $(this).find('company').find('name:first').text();
+                    if ($.inArray(id, ids) < 0) {
+                        $('<option value="' + id + '"></option>').html(name).appendTo(COMPANIES);
+                        ids.push(id);
+                    }
                 });
                 COMPANIES.show();
                 LOADER.hide();
